@@ -50,6 +50,7 @@ func parseLine(line string) Point{
 func main(){
     lines := strings.Split(getInput(), "\n")
 
+
     pos := Point{0,0}
     for _, line := range lines {
         amount := parseLine(line)
