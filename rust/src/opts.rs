@@ -3,7 +3,7 @@ use std::path::PathBuf;
 use clap::Parser;
 
 
-#[derive(Parser)]
+#[derive(Parser,Debug)]
 #[clap()]
 pub struct Opts {
 
