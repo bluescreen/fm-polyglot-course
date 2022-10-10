@@ -26,14 +26,15 @@ fn parse_line(line: &str) -> Point {
 }
 
 fn main() {
-    let result = get_input()
-        .lines()
-        .map(parse_line)
-        .fold(Point { x: 0, y: 0 }, |mut acc, point| {
-            acc.x += point.x;
-            acc.y += point.y;
-            return acc;
-        });
+    let result =
+        get_input()
+            .lines()
+            .map(parse_line)
+            .fold(Point { x: 0, y: 0 }, |mut acc, point| {
+                acc.x += point.x;
+                acc.y += point.y;
+                return acc;
+            });
 
     println!("{:?}", result);
 }

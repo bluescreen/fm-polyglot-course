@@ -1,7 +1,7 @@
+use anyhow::{anyhow, Result};
 use std::str::FromStr;
-use anyhow::{Result, anyhow};
 
-fn get_input()  -> &'static str {
+fn get_input() -> &'static str {
     return "0,9 -> 5,9
 8,0 -> 0,8
 9,4 -> 3,4
@@ -17,16 +17,15 @@ fn get_input()  -> &'static str {
 #[derive(Debug)]
 struct Point {
     x: i32,
-    y: i32
+    y: i32,
 }
 
-
-impl FromStr for Point{
+impl FromStr for Point {
     type Err = anyhow::Error;
- 
-    fn from_str(s: &str) -> Result<Self>{
+
+    fn from_str(s: &str) -> Result<Self> {
         let result = s.split_once(",");
-        if result.is_none(){
+        if result.is_none() {
             return Err(anyhow!("expected point to be a number"));
         }
 
@@ -34,23 +33,22 @@ impl FromStr for Point{
         let x: i32 = str::parse(x)?;
         let y: i32 = str::parse(y)?;
 
-        return Ok(Point{x,y});
-
+        return Ok(Point { x, y });
     }
 }
 
 #[derive(Debug)]
 struct Line {
     p1: Point,
-    p2: Point
+    p2: Point,
 }
 
-impl FromStr for Line{
+impl FromStr for Line {
     type Err = anyhow::Error;
- 
-    fn from_str(s: &str) -> Result<Self>{
+
+    fn from_str(s: &str) -> Result<Self> {
         let result = s.split_once(" -> ");
-        if result.is_none(){
+        if result.is_none() {
             return Err(anyhow!("expected point to be a number"));
         }
 
@@ -58,23 +56,20 @@ impl FromStr for Line{
         let p1: Point = str::parse(p1)?;
         let p2: Point = str::parse(p2)?;
 
-        return Ok(Line{p1,p2});
-
+        return Ok(Line { p1, p2 });
     }
 }
 impl Line {
-    fn is_horizontal_or_vertical(&self) -> bool{
-        return self.p1.x == self.p2.x || self.p1.y == self.p2.y; 
+    fn is_horizontal_or_vertical(&self) -> bool {
+        return self.p1.x == self.p2.x || self.p1.y == self.p2.y;
     }
 }
 
-
-
-fn main(){
+fn main() {
     let result: Vec<Line> = get_input()
         .lines()
         .flat_map(|x| str::parse(x))
-        .filter(|x: &Line|  x.is_horizontal_or_vertical())
+        .filter(|x: &Line| x.is_horizontal_or_vertical())
         .collect();
 
     println!("{:#?}", result);
