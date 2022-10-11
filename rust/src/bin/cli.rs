@@ -1,6 +1,10 @@
+use anyhow::Result;
 use clap::Parser;
+use playground_rust::{config::Config, opts::Opts};
 
-fn main() {
-    let opts = playground_rust::opts::Opts::parse();
+fn main() -> Result<()> {
+    let opts: Config = Opts::parse().try_into()?;
     println!("{:?}", opts);
+
+    return Ok(());
 }
